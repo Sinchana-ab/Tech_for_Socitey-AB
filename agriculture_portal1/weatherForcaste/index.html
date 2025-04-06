@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Bilbo+Swash+Caps&family=Concert+One&family=Creepster&family=East+Sea+Dokdo&family=IBM+Plex+Sans:wght@300&family=Lato&family=Love+Light&family=Love+Ya+Like+A+Sister&family=Loved+by+the+King&family=Lovers+Quarrel&family=Montserrat&family=Newsreader&family=Pacifico&family=Playfair+Display&family=Playfair+Display+SC&family=Poppins&family=Rampart+One&family=Roboto&family=Roboto+Flex:wght@800&display=swap" rel="stylesheet">
+	<!-- boxicons cdn link -->
+	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+	 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+
+    <link href="style.css" rel="stylesheet">
+	<title>Weather Application</title>
+</head>
+<body>
+<div class="container">
+	<div class="frontpage">
+		<div class="frontpage-contents">
+			<audio id="backgroundAudio" autoplay 1>
+				<source src="audio.mp3" type="audio/mpeg">
+			</audio>
+			<img src="https://cdn-icons-png.flaticon.com/512/1779/1779882.png" alt="weather-front-image" class="weather-front-image">
+			<h2>Weather <span style="font-size: 30px;font-weight: 100;">Forecasts</span></h2>
+			<button type="button" name="" class="getting-started-btn">Get Start
+			</button>
+			<p>Check any weather</p>
+			<hr />
+			<footer>
+				website made by sinchana AB
+			</footer>
+		</div>
+	</div>
+<!-- weather input code starts -->
+<div class="weather-container">
+	<button type="button" name="" class="back-btn">Back to Home</button>
+	<div class="weatherInputField">
+			<i class='bx bx-search-alt'></i>
+			<input class="citySearch" type="text" name="" placeholder="Search City...">
+			<button type="button" name="" class="searchBtn">Search</button>
+			<button type="button" name="" class="current-location-btn">Current Location</button>
+			<a href="index1.html"><button type="button" name="" class="histroy-btn">Historical weatherForecast</button></a>
+		</div>
+	<div class="weatherInput">
+		<div class="location-data">
+			<div class="location-content">
+			<i class='bx bxs-map'></i>
+			<h3>-----</h3>
+			</div>
+			<p>Date Month Year</p>
+		</div>
+		<div class="weather-Degree">
+			<h1>--°</h1>
+			<!-- <img src="https://openweathermap.org/img/wn/10n@4x.png" alt="weather-Degree-image" class="weather-Degree-img"> -->
+			<h2>-----</h2>
+
+		</div>
+		<div class="weather-pallete">
+			<div class="pallete-data">
+				<i class='bx bx-water'></i>
+				<small>-- M/B</small>
+				<span>Pressure</span>
+			</div>
+			<div class="pallete-data">
+				<i class='bx bxs-droplet-half' ></i>
+				<small>-- %</small>
+				<span>Humidity</span>
+			</div>
+			<div class="pallete-data">
+				<i class='bx bx-wind' ></i>
+				<small>-- M/S</small>
+				<span>wind Speed</span>
+			</div>
+		</div>
+	</div>
+<!-- weather input code ends -->
+<!-- weather forecasts code starts -->
+	<div class="swiper mySwiper weather-forecasts">
+		<h3>5 Days Weather Forecast (Slide)</h3>
+		<ul class="swiper-wrapper weather-ul">
+			<li class="swiper-slide weather-data">
+				<span>-- -- --</span>
+				<!-- <img src="http://openweathermap.org/img/wn/09d@2x.png" alt="forecast-image" class="forecast-img"> -->
+				<!-- <div class="icon-overlay"></div> -->
+				<small>--°</small>
+			</li>
+			<li class="swiper-slide weather-data">
+				<span>-- -- --</span>
+				<!-- <img src="http://openweathermap.org/img/wn/09d@2x.png" alt="forecast-image" class="forecast-img"> -->
+				<!-- <div class="icon-overlay"></div> -->
+				<small>--°</small>
+			</li>
+			<li class="swiper-slide weather-data">
+				<span>-- -- --</span>
+				<!-- <img src="http://openweathermap.org/img/wn/09d@2x.png" alt="forecast-image" class="forecast-img"> -->
+				<!-- <div class="icon-overlay"></div> -->
+				<small>--°</small>
+			</li>
+			<li class="swiper-slide weather-data">
+				<span>-- -- --</span>
+				<!-- <img src="http://openweathermap.org/img/wn/09d@2x.png" alt="forecast-image" class="forecast-img"> -->
+				<!-- <div class="icon-overlay"></div> -->
+				<small>--°</small>
+			</li>
+			<li class="swiper-slide weather-data">
+				<span>-- -- --</span>
+				<!-- <img src="http://openweathermap.org/img/wn/09d@2x.png" alt="forecast-image" class="forecast-img"> -->
+				<!-- <div class="icon-overlay"></div> -->
+				<small>--°</small>
+			</li>
+			<li class="swiper-slide weather-data">
+				<span>-- -- --</span>
+				<!-- <img src="http://openweathermap.org/img/wn/09d@2x.png" alt="forecast-image" class="forecast-img"> -->
+				<!-- <div class="icon-overlay"></div> -->
+				<small>--°</small>
+			</li>
+		</ul>
+	</div>
+</div>
+</div>
+<!-- weather forecasts code ends -->
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  <script src="script.js"></script>
+  <!-- Initialize Swiper -->
+  <script defer>
+    var swiper = new Swiper(".mySwiper", {
+      slidesPerView: 3,
+      spaceBetween: 15,
+      freeMode: true,
+    });
+    
+// creating a function named createWeatherCard
+	function createWeatherCard(cityName2, weatherItem2, index2)
+	{
+		if(index2 === 0)
+		{
+			return `
+			<div class="location-data">
+			<div class="location-content">
+			<i class='bx bxs-map'></i>
+			<h3>${cityName2}</h3>
+			</div>
+			<p>${weatherItem2.dt_txt.split(' ')[0]}</p>
+			</div>
+			<div class="weather-Degree">
+			<h1>${(weatherItem2.main.temp - 273.15).toFixed(2)}°</h1>
+			<img src="https://openweathermap.org/img/wn/${weatherItem2.weather[0].icon}@4x.png" alt="weather-Degree-image" class="weather-Degree-img">
+			<h2>${weatherItem2.weather[0].description}</h2>
+			</div>
+			<div class="weather-pallete">
+			<div class="pallete-data">
+				<i class='bx bx-water'></i>
+				<small>${weatherItem2.main.pressure} M/B</small>
+				<span>Pressure</span>
+			</div>
+			<div class="pallete-data">
+				<i class='bx bxs-droplet-half' ></i>
+				<small>${weatherItem2.main.humidity}%</small>
+				<span>Humidity</span>
+			</div>
+			<div class="pallete-data">
+				<i class='bx bx-wind' ></i>
+				<small>${weatherItem2.wind.speed} M/S</small>
+				<span>wind Speed</span>
+			</div>
+			</div>
+			`
+		}
+		else
+		{
+			return `
+			<li class="swiper-slide weather-data">
+				<span>${weatherItem2.dt_txt.split(' ')[0]}</span>
+				<img src="http://openweathermap.org/img/wn/${weatherItem2.weather[0].icon}@2x.png" alt="forecast-image" class="forecast-img">
+				<div class="icon-overlay"></div>
+				<small>${(weatherItem2.main.temp - 273.15).toFixed(2)}°</small>
+			</li>
+			`
+		}
+	}
+	
+	const backBtn = document.querySelector('.back-btn');
+    backBtn.addEventListener('click', function() {
+     document.querySelector('.frontpage').classList.remove('active');
+     document.querySelector('.weather-container').classList.remove('active');
+});
+</script>
+</body>
+</html>

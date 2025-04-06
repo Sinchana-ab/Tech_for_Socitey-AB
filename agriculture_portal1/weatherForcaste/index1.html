@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Weather Forecast</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Bilbo+Swash+Caps&family=Concert+One&family=Creepster&family=East+Sea+Dokdo&family=IBM+Plex+Sans:wght@300&family=Lato&family=Love+Light&family=Love+Ya+Like+A+Sister&family=Loved+by+the+King&family=Lovers+Quarrel&family=Montserrat&family=Newsreader&family=Pacifico&family=Playfair+Display&family=Playfair+Display+SC&family=Poppins&family=Rampart+One&family=Roboto&family=Roboto+Flex:wght@800&display=swap" rel="stylesheet">
+  <!-- boxicons cdn link -->
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+
+  <link href="style1.css" rel="stylesheet">
+</head>
+<body>
+  <h1>Weather Forecast</h1>
+  <form>
+    <label for="location">Location:
+    <input type="text" id="location" name="location"></label>
+    <label for="date">Date (yyyy-mm-dd):
+    <input type="text" id="date" name="date"></label>
+    <label for="time">Time (hh:mm):<input type="text" id="time" name="time"></label>
+    <br />
+    <button type="submit">Get Weather</button>
+  </form>
+  <div id="weather-data"></div>
+
+  <script>
+    $(document).ready(function() {
+      $("form").submit(function(event) {
+        event.preventDefault();
+        var location = $("#location").val();
+        var date = $("#date").val();
+        var time = $("#time").val();
+        getWeather(location, date, time);
+      });
+    });
+
+    function getWeather(location, date, time) {
+      var apiKey = "4be02127fcee082c870e117e3190277f";
+      var url = "http://api.openweathermap.org/data/2.5/forecast";
+      var params = {
+        q: location,
+        units: "metric",
+        apikey: apiKey
+      };
+
+      $.ajax({
+        type: "GET",
+        url: url,
+        data: params,
+        dataType: "json",
+        success: function(data) {
+          var weatherData = data.list;
+          var specifiedDateTime = date + " " + time;
+          var specifiedDate = new Date(specifiedDateTime).getTime() / 1000;
+
+          // Find the temperature for the specified date and time
+          var closestMatch = weatherData.reduce(function(prev, current) {
+            var currentDateTime = current.dt;
+            var diff = Math.abs(currentDateTime - specifiedDate);
+            if (!prev || diff < Math.abs(prev.dt - specifiedDate)) {
+              return current;
+            }
+            return prev;
+          }, null);
+
+          if (closestMatch) {
+            var html = "<h2>Weather Forecast for " + location + " on " + specifiedDateTime + "</h2>";
+            html += "<p>Date: " + specifiedDateTime + "</p>";
+            html += "<p>Temperature: " + closestMatch.main.temp + "°C</p>";
+            html += "<p>Humidity: " + closestMatch.main.humidity + "%</p>";
+            html += "<p>Wind Speed: " + closestMatch.wind.speed + " m/s</p>";
+            html += "<p>Weather Condition: " + closestMatch.weather[0].description + "</p>";
+            $("#weather-data").html(html);
+          } else {
+            $("#weather-data").html("<p>No weather data found for the specified date and time.</p>");
+          }
+        }
+      });
+    }
+  </script>
+</body>
+</html>
